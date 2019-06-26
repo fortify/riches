@@ -1,0 +1,225 @@
+<project name="blank">
+
+    <property name="dist.path"  location="../dist"/>
+
+    <!-- Project settings -->
+    <property name="project.title" value="Riches Bank"/>
+    <property name="project.dist.name" value="riches"/>
+    <!-- Versioning -->
+    <property name="build.number" value="0"/>
+    <property name="majorversion" value="3.1"/>
+    <property name="fullversion" value="${majorversion}.${build.number}"/>
+    <property name="project.version" value="${fullversion}"/>
+
+    <!-- Path settings -->
+    <property name="web-inf" location="${basedir}/WEB-INF"/>
+    <property name="src.java" location="${web-inf}/src/java"/>
+    <property name="libs" location="${web-inf}/lib"/>
+    <property name="classes" location="${web-inf}/classes"/>
+    <property name="db.dir" location="${web-inf}/database"/>
+    <property name="build.dir" location="${basedir}/build"/>
+    <property name="build.jsp.dir" location="${build.dir}/jsp"/>
+
+    <property name="jdbc.url" value="jdbc:hsqldb:file:${db.dir}/riches"/>
+    <property name="jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+    <property name="jdbc.username" value="sa"/>
+    <property name="jdbc.password" value="PASSWORD"/>
+
+    <property name="tomcat5.5.dir" location="${basedir}/etc/tomcat5.5-support"/>
+    <property name="jboss4.dir" location="${basedir}/etc/jboss4-support"/>
+
+
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="../tools/ant-contrib.jar"/>
+
+    <path id="javac.classpath">
+        <fileset dir="${libs}">
+            <include name="**/*.jar" />
+        </fileset>
+        <fileset dir="${basedir}/lib">
+            <include name="**/*.jar" />
+        </fileset>
+    </path>
+
+    <!-- riches now include HSQL 2.3, but to generate the database file, we still have to use old version 1.8, otherwise, it has problem in Tomcat 6.0, no time to investigate... -->
+    <path id="hsql.classpath">
+        <pathelement location="../tools/hsqldb-1.8.jar"/>
+    </path>
+
+    <target name="tomcat5.5">
+        <property name="server" value="tomcat5.5"/>
+        <var name="project.dist.name" unset="true"/>
+        <var name="project.dist.name" value="riches_tomcat5.5"/>
+        <antcall target="all"/>
+    </target>
+
+    <target name="tomcat5.0">
+        <property name="server" value="tomcat5.0"/>
+        <var name="project.dist.name" unset="true"/>
+        <var name="project.dist.name" value="riches_tomcat5.0"/>
+        <antcall target="all"/>
+    </target>
+
+    <target name="jboss4">
+        <property name="server" value="jboss4"/>
+        <var name="project.dist.name" unset="true"/>
+        <var name="project.dist.name" value="riches_jboss4"/>
+        <antcall target="all"/>
+    </target>
+
+    <target name="weblogic9">
+        <property name="server" value="weblogic9"/>
+        <antcall target="all"/>
+    </target>
+
+    <target name="weblogic10">
+        <property name="server" value="weblogic10"/>
+        <antcall target="all"/>
+    </target>
+
+    <!-- Check timestamp on files -->
+    <target name="prepare">
+        <tstamp/>
+    </target>
+
+    <!-- Copy any resource or configuration files -->
+    <target name="resources">
+        <copy todir="${classes}" includeEmptyDirs="no">
+            <fileset dir="${src.java}">
+                <patternset>
+                    <include name="**/*.conf"/>
+                    <include name="**/*.properties"/>
+                    <include name="**/*.xml"/>
+                </patternset>
+            </fileset>
+        </copy>
+    </target>
+
+    <!-- Normal compile -->
+    <target name="compile" depends="prepare,resources,create-db">
+        <condition property="compile-server-support.target" value="compile-tomcat5.5-support">
+            <equals arg1="${server}" arg2="tomcat5.5"/>
+        </condition>
+        <condition property="compile-server-support.target" value="compile-jboss4-support">
+            <equals arg1="${server}" arg2="jboss4"/>
+        </condition>
+        <!-- ELSE: --> <property name="compile-server-support.target" value="compile-tomcat5.0-support"/>
+        <antcall target="${compile-server-support.target}"/>
+
+        <javac srcdir="${src.java}" destdir="${classes}" debug="on" source="1.5" target="1.5">
+            <classpath refid="javac.classpath"/>
+        </javac>
+
+        <post.compile />
+    </target>
+
+    <macrodef name="post.compile">
+        <sequential>
+            <delete file="${basedir}/WEB-INF/web.xml"/>
+            <switch value="${server}">
+                <case value="weblogic9">
+                    <delete file="${basedir}/WEB-INF/weblogic.xml"/>
+                    <copy tofile="${basedir}/WEB-INF/web.xml" file="${basedir}/WEB-INF/weblogic_web.xml"/>
+                    <copy tofile="${basedir}/WEB-INF/weblogic.xml" file="${basedir}/WEB-INF/weblogic9.xml"/>
+                </case>
+                <case value="weblogic10">
+                    <delete file="${basedir}/WEB-INF/weblogic.xml"/>
+                    <copy tofile="${basedir}/WEB-INF/web.xml" file="${basedir}/WEB-INF/weblogic_web.xml"/>
+                    <copy tofile="${basedir}/WEB-INF/weblogic.xml" file="${basedir}/WEB-INF/weblogic10.xml"/>
+                </case>
+                <default>
+                    <copy tofile="${basedir}/WEB-INF/web.xml" file="${basedir}/WEB-INF/template_web.xml"/>
+                </default>
+            </switch>
+            <replace token="&lt;!-- JSP-PRECOMPILE-PLACEHOLDER --&gt;" value="" file="${basedir}/WEB-INF/web.xml"/>
+        </sequential>
+    </macrodef>
+
+    <target name="compile-tomcat5.5-support">
+        <property name="server-support.src" location="${tomcat5.5.dir}/src"/>
+        <echo>Replacing some classes with those under ${server-support.src}</echo>
+        <javac srcdir="${server-support.src}" destdir="${classes}" debug="on" source="1.5" target="1.5">
+            <classpath refid="javac.classpath"/>
+        </javac>
+    </target>
+
+    <target name="compile-tomcat5.0-support">
+        <!-- this is empty -->
+    </target>
+
+    <target name="compile-jboss4-support">
+        <property name="server-support.src" location="${jboss4.dir}/src"/>
+        <echo>Replacing some classes with those under ${server-support.src}</echo>
+        <javac srcdir="${server-support.src}" destdir="${classes}" debug="on" source="1.5" target="1.5">
+            <classpath refid="javac.classpath"/>
+        </javac>
+    </target>
+
+    <target name="create-version">
+        <echo message="${project.title} ${fullversion}" file="version.txt"/>
+    </target>
+
+    <target name="create-db">
+        <mkdir dir="${db.dir}"/>
+        <!-- when we first create the DB out of nothing, the password has to be empty -->
+        <sql driver="${jdbc.driver}" url="${jdbc.url}"
+             userid="${jdbc.username}" password="" src="create_db.sql">
+            <classpath refid="hsql.classpath"/>
+        </sql>
+        <sql driver="${jdbc.driver}" url="${jdbc.url}"
+             userid="${jdbc.username}" password="${jdbc.password}">
+            <classpath refid="hsql.classpath"/>
+             COMMIT; SHUTDOWN;
+        </sql>
+        <jar destfile="${libs}/riches_db.jar" basedir="${web-inf}" includes="database/**"/>
+        <delete dir="${db.dir}"/>
+    </target>
+
+    <target name="clean">
+        <delete dir="${classes}"/>
+        <delete dir="${db.dir}"/>
+        <delete dir="${build.dir}"/>
+        <delete file="${basedir}/WEB-INF/web.xml"/>
+        <delete file="${libs}/riches_db.jar"/>
+    </target>
+
+    <!-- Create binary distribution -->
+    <target name="war" description="Create binary distribution in .war format">
+        <condition property="context.dir" value="${tomcat5.5.dir}">
+            <equals arg1="${server}" arg2="tomcat5.5"/>
+        </condition>
+        <condition property="context.dir" value="${jboss4.dir}">
+            <equals arg1="${server}" arg2="jboss4"/>
+        </condition>
+        <!-- ELSE: --> <property name="context.dir" value="${basedir}"/>
+
+        <war destfile="${dist.path}/${project.dist.name}.war" webxml="${web-inf}/web.xml">
+            <metainf dir="${context.dir}" includes="context.xml"/>
+            <fileset dir="${basedir}">
+                <include name="*.swf"/>
+                <include name="*.jar"/>
+                <include name="version.txt"/>
+                <include name="secrets.txt"/>
+                <include name="css/**"/>
+                <include name="img/**"/>
+                <include name="js/**"/>
+                <include name="login/**"/>
+                <include name="pages/**"/>
+                <include name="WEB-INF/**"/>
+                <exclude name="WEB-INF/web.xml"/>
+                <exclude name="WEB-INF/lib/servlet-api.jar"/>
+                <exclude name="WEB-INF/lib/README.txt"/>
+                <exclude name="WEB-INF/src/**"/>
+            </fileset>
+        </war>
+    </target>
+
+    <target name="ear" description="Create binary distribution in .ear format" depends="clean,compile,war">
+        <ear destfile="${dist.path}/${project.dist.name}.ear" appxml="${basedir}/application.xml">
+            <fileset dir="${dist.path}" includes="${project.dist.name}.war"/>
+        </ear>
+    </target>
+
+    <!-- Build project and create distribution-->
+    <target name="all" depends="clean,compile,create-version,war"/>
+
+</project>

@@ -1,0 +1,19 @@
+<!-- the following XML fragment should be pasted into JBOSS_SERVER_HOME/conf/login-config.xml
+	immediately after the opening <policy> tag -->
+
+	<application-policy name="riches">
+		<authentication>
+			<login-module code="org.jboss.security.auth.spi.DatabaseServerLoginModule" flag="required">
+				<module-option name="dsJndiName">java:/richesDS</module-option>
+				<module-option name="principalsQuery">
+					SELECT password FROM profile WHERE username=?
+				</module-option>
+				<module-option name="rolesQuery">
+					SELECT rolename, 'Roles' FROM role WHERE username=?
+				</module-option>
+			</login-module>
+		</authentication>
+	</application-policy>
+
+
+<!-- ... other application-policies already defined in login-config.xml ... -->

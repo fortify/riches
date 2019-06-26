@@ -1,0 +1,97 @@
+<!-- Fortify Software Application Context for Tomcat 5 -->
+
+<Context path="/riches" docBase="riches">
+    <Logger className="org.apache.catalina.logger.FileLogger"
+        prefix="riches_log." suffix=".txt" timestamp="true"/>
+
+	<Manager className="org.apache.catalina.session.StandardManager" pathname=""/>
+
+    <Realm className="org.apache.catalina.realm.DataSourceRealm" debug="99"
+        localDataSource="true" dataSourceName="jdbc/riches"
+        userTable="profile" userNameCol="username" userCredCol="password"
+        userRoleTable="role" roleNameCol="rolename"/>
+
+    <Resource name="jdbc/riches" auth="Container" type="javax.sql.DataSource"/>
+	<ResourceLink name="jdbc/riches"
+            global="java:comp/env/jdbc/riches"
+            type="javax.sql.DataSource"/>
+    <ResourceParams name="jdbc/riches">
+		    <!-- dB username and password for dB connections  -->
+		    <parameter>
+	            <name>username</name>
+		        <value>sa</value>
+		    </parameter>
+	        <parameter>
+		        <name>password</name>
+		        <value></value>
+	        </parameter>
+
+		    <parameter>
+	            <name>driverClassName</name>
+	            <value>org.hsqldb.jdbcDriver</value>
+		    </parameter>
+		    <parameter>
+		        <name>url</name>
+                <value>jdbc:hsqldb:file:TOMCAT_HOME/webapps/riches/WEB-INF/database/riches</value> <!-- TOMCAT_HOME is filled in correctly by the listener com.fortify.samples.riches.database.DatabaseController -->
+            </parameter>
+
+            <parameter>
+                <name>factory</name>
+                <value>org.apache.commons.dbcp.BasicDataSourceFactory</value>
+            </parameter>
+            <!-- Maximum number of dB connections in pool. Make sure you
+                configure your mysqld max_connections large enough to handle
+                all of your db connections. Set to 0 for no limit.
+                -->
+            <parameter>
+                <name>maxActive</name>
+                <value>100</value>
+            </parameter>
+            <!-- Maximum number of idle dB connections to retain in pool.
+                Set to 0 for no limit.
+                -->
+            <parameter>
+                <name>maxIdle</name>
+                <value>30</value>
+            </parameter>
+            <!-- Maximum time to wait for a dB connection to become available
+                in ms, in this example 10 seconds. An Exception is thrown if
+                this timeout is exceeded.  Set to -1 to wait indefinitely.
+                -->
+            <parameter>
+                <name>maxWait</name>
+                <value>10000</value>
+            </parameter>
+
+            <!-- Autocommit setting.  This setting is required to make
+                   Hibernate work.  Or you can remove calls to commit(). -->
+            <parameter>
+                <name>defaultAutoCommit</name>
+                <value>false</value>
+            </parameter>
+            <!-- Recover abandoned connections -->
+            <parameter>
+                <name>removeAbandoned</name>
+                <value>true</value>
+            </parameter>
+            <!-- Set the number of seconds a dB connection has been idle 
+                before it is considered abandoned. 
+                -->
+            <parameter>
+                <name>removeAbandonedTimeout</name>
+                <value>60</value>
+            </parameter>
+            <!-- Log a stack trace of the code which abandoned the dB 
+                connection resources. 
+                -->
+            <parameter>
+                <name>logAbandoned</name>
+                <value>true</value>
+            </parameter>
+    </ResourceParams>
+
+    <!-- enable app level access logging. Query Strings stored in localhost log -->
+            <Valve className="org.apache.catalina.valves.AccessLogValve"
+                 directory="logs"  prefix="localhost_access_log." suffix=".txt"
+                 pattern="common" resolveHosts="false"/>
+</Context>

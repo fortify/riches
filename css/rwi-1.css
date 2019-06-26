@@ -1,0 +1,77 @@
+/* CSS created for Fortify Software by Eazle, LLC */
+/*                   3/2008                       */
+
+@charset "utf-8";
+
+/*  text   */
+* 		{ font-family:Arial, Helvetica, sans-serif;}
+
+/*  html styles   */
+body 	{ width:100%; height:100%; margin:0; padding:0; background:#ccccff url(../img/bg.jpg) top left repeat-x;}
+img 	{ border:none;}
+label	{ font-weight:bold;}
+hr		{ color:#669; width:85%; size:1px;}
+h2		{ font-size:110%; color:#669; border:none;}
+
+/*  page layout   */
+#content	{ background-color:#fff; width:1000px; border:1px solid #336;}
+
+/*  top right menu & search  */
+#utilities 	{ margin-top:5px; margin-right:5px;color:#669; font-size:85%; width:80%;}
+#logo 		{ padding-left:48px;}
+
+/*  forms  */
+form 			{ vertical-align:middle; }
+#search 		{ margin:4px 10px 2px 2px;}
+#searchbox	{ background-color:#faf0a0;width:125px;border:1px solid #b7b09e;}
+#userid		{ font: normal normal 85% Arial, Helvetica, sans-serif; color:#306; text-align:left;}
+#username	{ font: normal normal 85% Arial, Helvetica, sans-serif; text-align:left;}
+#password	{ font: normal normal 85% Arial, Helvetica, sans-serif; text-align:left;}
+#btnSignon	{ vertical-align:middle; padding-left:.5em;}
+#signup		{ font:normal 95% Arial, Helvetica, sans-serif; color:#336; text-align:center;}
+#signup a:hover { text-decoration:underline; color:#c60;}
+
+/*  main menu   */
+#menubar 		{ margin-top:4px;margin-bottom:4px;background: url(../img/menubar_bg.gif) top left repeat-y; height:1.5em; text-align:center; vertical-align:middle;}
+#menubar td		{ font-size:95%;font-weight:bold;}
+#menubar td a 	{ margin-right:25px;color:#669;text-decoration:none;}
+#menubar td a:hover 	{ color:#c60;text-decoration:none}
+
+
+/*  left side   */
+#left				{ margin:.25em;}
+#onlinebanking	{ padding-left:1em;background-color:#ccf; border-top:1px solid #336;border-left:1px solid #336;border-right:1px solid #336; width:250px;}
+#signon_title	{ padding-top:.5em;font:bold 130% Arial, Helvetica, sans-serif; color:#336; text-align:left; height:40px;}
+#accounts		{ vertical-align:top; text-align:right; color:#336;}
+#goto				{ font: normal normal 85% Arial, Helvetica, sans-serif; color:#336; margin-right:1em; background-color:#fff;}
+#services		{ font:normal 95% Arial, Helvetica, sans-serif; color:#336; text-align:left; margin-left:1em;}
+#services a		{ text-decoration:none;}
+#services a:hover { text-decoration:underline; color:#c60;}
+#locator			{ font: normal normal 85% Arial, Helvetica, sans-serif; color:#336;}
+
+
+/*  right side  */
+#right			{ margin:.25em;}
+
+
+/*  images  */
+#bg_image		{ background-color:#ccf; border-bottom:1px solid #000;border-left:1px solid #336;border-right:1px solid #336; margin-bottom:-.1em;}
+#promo			{}
+
+
+/* links  */
+.links			{ font: normal 85% Arial, Helvetica, sans-serif; color:#999;}
+.row1				{ }
+.row2				{ }
+.links a			{ text-decoration:none; margin-left: 1em;}
+.links a:hover { text-decoration:underline; color:#c60;}
+.row1title		{ font: bold 120% Arial, Helvetica, sans-serif; color:#fff; background-color:#669;margin-bottom:.25em; margin-top:.25em; margin-left:.25em;}
+.row2title		{ font: bold 120% Arial, Helvetica, sans-serif; color:#fff; background-color:#669;margin-bottom:.25em; margin-top:.5em; margin-left:.25em;}
+.links h2.inv 	{ margin-right:0;}
+.links .title	{ font: bold 120% Arial, Helvetica, sans-serif; color:#336; border:none; background-color:#99c; height:26px; vertical-align:middle;}
+
+/*  footer  */
+#footer		{ text-align:center;}
+#footerNav	{ font:normal 75% Arial, Helvetica, sans-serif; color:#666666; text-decoration:none; text-align:center;}
+#footerNav a:hover { text-decoration:underline; color:#c60;}
+#copy			{ font:normal 75% Arial, Helvetica, sans-serif; color:#666666; text-decoration:none; text-align:center;}

@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS created for Fortify Software by Eazle, LLC */
+/*                   3/2008                       */
+
+/*  text   */
+* 		{ font-family:Arial, Helvetica, sans-serif;}
+
+/*  html styles   */
+body 	{ width:100%; margin:0; padding:0; background:#ccccff url(../img/bg.jpg) top left repeat-x;}
+img 	{ border:none;}
+textarea { font-size:90%;  color:#333;}
+select 	{ margin-top:.18em; background-color:#ffc;}
+input		{ margin-top:.18em; background-color:#ffc;}
+
+
+/*  page layout  */
+#content	{ background-color:#fff; width:1000px; border:1px solid #336;}
+.normal	{ font-size:85%; color:#000;vertical-align:middle;}
+.bold		{ font-weight:bold;}
+
+/*  header  */
+#utilities 	{ margin-top:.5em; color:#669; font-size:75%; width:100%;}
+#utilities a{ text-decoration:none;}
+#logo 		{ padding-left:48px;}
+
+#menubar 				{ background-color:#99c; height:1.5em; text-align:center; vertical-align:middle;}
+#menubar td				{ font-size:95%;font-weight:bold;}
+#menubar td a 			{ margin-left:25px;color:#fff;text-decoration:none;}
+#menubar td a:hover 	{ color:#fc3;text-decoration:none}
+
+/*  page title area   */
+#pageTitle		{ margin: .5em; text-align:left;}
+#summary			{ font-size:150%; font-weight:bold; color:#669;}
+#summary			{ font-size:150%; font-weight:bold; color:#669;}
+.message 		{ font-size:85%; color:#CC0000;vertical-align:middle;}
+
+/*  content area   */
+.detailBox	{ border:1px solid #633; background-color:#fff; text-align:center;vertical-align:middle; margin:.25em;}
+.messageBox	{ border:1px solid #633; background-color:#fff; text-align:center;vertical-align:middle;}
+.title		{ text-align:center;}
+.titleRow	{ font-size:110%; color:#633; border:1px solid #669; background-color:#c8c2ab;height:28px; vertical-align:middle; text-align:center;}
+.labelCell	{ font-size:75%; color:#633; background-color:#e5dec3;height:28px; vertical-align:middle; text-align:left;}
+.dataCell	{ font-size:75%; color:#633; background-color:#e5dec3;height:28px; vertical-align:middle; text-align:middle;}
+.messageBody	{ background-color:white; top:0px; bottom:0px; left:0px; right:0px; }
+.labelCell.alt { background-color:#f8f0d2; border-bottom:1px solid #633;border-top:1px solid #633;}
+.dataCell.alt 	{ background-color:#f8f0d2; border-bottom:1px solid #633;border-top:1px solid #633;}
+.calendar		{ vertical-align:middle;}
+
+.subtitle				{ font-size:75%; color:#633; background-color:#e5dec3;height:28px; vertical-align:middle; text-align:left;}
+.subtitle td			{border:1px solid #c8c2ab; padding-left:.5em;}
+.subtitle a 			{ text-decoration:none;}
+.subtitle a:hover 	{ text-decoration:underline; color:#000000;}
+.subtitle .alt 		{ background-color:#f8f0d2;}
+	
+
+
+/*  footer  */
+#footer		{ text-align:center;}
+#copy	{ font:normal 75% Arial, Helvetica, sans-serif; color:#666666; text-decoration:none; text-align:center;}
+

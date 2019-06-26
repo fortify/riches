@@ -1,0 +1,25 @@
+<!-- Riches Application Context for Tomcat 5.5 -->
+
+<Context path="/riches" docBase="riches">
+    <Logger className="org.apache.catalina.logger.FileLogger"
+        prefix="riches_log." suffix=".txt" timestamp="true"/>
+
+	<Manager className="org.apache.catalina.session.StandardManager" pathname=""/>
+
+    <Realm className="org.apache.catalina.realm.DataSourceRealm" debug="99"
+        localDataSource="true" dataSourceName="jdbc/riches"
+        userTable="profile" userNameCol="username" userCredCol="password"
+        userRoleTable="role" roleNameCol="rolename"/>
+
+	<!-- NOTE: you can NOT use a <ResourceParams> tag with nested <parameter><name>...</name><value>...</value></parameter>
+	     tags like we used to in the tomcat 5 app context file. If you do, all the attributes of the datasource (url,
+	     username, etc) will be null! -->
+	<!-- the database in in riches_db.jar -->
+	<Resource name="jdbc/riches" auth="Container"
+            type="javax.sql.DataSource"
+	        username="sa" password="PASSWORD"
+            driverClassName="org.hsqldb.jdbcDriver"
+	        url="jdbc:hsqldb:res:/database/riches"
+            maxActive="20" maxIdle="10"/>
+
+</Context>
