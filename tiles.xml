@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://struts.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+<!-- dummy file -->
+<definition name="test" template="/pages/testing123.jsp">
+	<put-attribute name="temp1" value="/pages/temp1.jsp" />
+	<put-attribute name="temp2" value="/pages/temp2.jsp" />
+	<put-attribute name="temp3" value="/pages/temp3.jsp" />
+</definition>
+
+</tiles-definitions>
