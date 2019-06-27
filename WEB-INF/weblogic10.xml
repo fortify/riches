@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:wls="http://www.bea.com/ns/weblogic/weblogic-web-app" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://www.bea.com/ns/weblogic/weblogic-web-app http://www.bea.com/ns/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd">
+ <wls:context-root>riches</wls:context-root>
+	<wls:security-role-assignment>
+	<wls:role-name>admin</wls:role-name>
+	<wls:principal-name>admin</wls:principal-name>
+	</wls:security-role-assignment>
+	<wls:security-role-assignment>
+	<wls:role-name>user</wls:role-name>
+	<wls:principal-name>user</wls:principal-name>
+	</wls:security-role-assignment>
+    <wls:resource-description>
+      <wls:jndi-name>jdbc/riches</wls:jndi-name>
+      <wls:res-ref-name>jdbc/riches</wls:res-ref-name>
+   </wls:resource-description>
+</wls:weblogic-web-app>
+
+        

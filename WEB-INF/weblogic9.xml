@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app
+ xmlns="http://www.bea.com/ns/weblogic/90"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-web-app.xsd">
+ <context-root>riches</context-root>
+	<security-role-assignment>
+	<role-name>admin</role-name>
+	<principal-name>admin</principal-name>
+	</security-role-assignment>
+	<security-role-assignment>
+	<role-name>user</role-name>
+	<principal-name>user</principal-name>
+	</security-role-assignment>
+    <resource-description>
+      <res-ref-name>jdbc/riches</res-ref-name>
+      <jndi-name>jdbc/riches</jndi-name>
+   </resource-description>
+</weblogic-web-app>

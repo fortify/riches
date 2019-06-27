@@ -1,0 +1,30 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<!DOCTYPE Configure PUBLIC
+    "-//Mort Bay Consulting//DTD Configure//EN"
+    "http://www.eclipse.org/jetty/configure_8_0.dtd">
+
+<!--
+  Configure a custom context for serving javadoc as static resources
+-->
+<Configure id='wac' class="org.eclipse.jetty.webapp.WebAppContext">
+  <New id="myds" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg><Ref refid="wac"/></Arg>
+    <Arg>jdbc/riches</Arg>
+    <Arg>
+      <New class="org.hsqldb.jdbc.JDBCDataSource">
+         <Set name="Url">jdbc:hsqldb:res:/database/riches</Set>
+		 <Set name="User">sa</Set>
+		 <Set name="Password">PASSWORD</Set>
+      </New>
+    </Arg>
+  </New>
+  <Get name="securityHandler">
+    <Set name="loginService">
+      <New class="org.eclipse.jetty.security.JDBCLoginService">
+            <Set name="name">Riches Bank Realm</Set>
+            <Set name="config">jar:file:<Property name="jetty.home" default="."/>/webapps/riches.war!/WEB-INF/jetty-realm.properties</Set>
+      </New>
+    </Set>
+  </Get>
+</Configure>
+
