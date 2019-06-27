@@ -1,0 +1,1 @@
+cglib-full-2.0.1.jarcommons-beanutils.jarcommons-collections.jarcommons-digester.jarcommons-fileupload.jarcommons-lang.jarcommons-logging.jarcommons-validator.jardom4j-1.4.jarehcache-0.7.jarhibernate2.jarjakarta-oro.jarjta.jarmysql.jarservlet-api.jarstruts.jarstruts2-core-2.0.11.jarfreemarker-2.3.8.jarognl-2.6.11.jarxwork-2.0.4.jarcommons-logging-api-1.1.jar
