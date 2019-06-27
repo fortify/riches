@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fortify.samples.riches.model.Role" table="role" >
+        <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+            <generator class="native"/>
+        </id>
+        <property name="username" column="username" type="java.lang.String" />
+        <property name="rolename" column="rolename" type="java.lang.String" />
+    </class>
+</hibernate-mapping>

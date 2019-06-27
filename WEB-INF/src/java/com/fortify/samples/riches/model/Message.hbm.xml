@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fortify.samples.riches.model.Message" table="message" >
+        <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+            <generator class="native"/>
+        </id>
+        <property name="username" column="username" type="java.lang.String" />
+        <property name="date" column="date" type="java.sql.Date" />
+        <property name="sender" column="sender" type="java.lang.String" />
+	<property name="severity" column="severity" type="java.lang.String" />
+        <property name="subject" column="subject" type="java.lang.String" />
+        <property name="body" column="body" type="java.lang.String" />
+    </class>
+</hibernate-mapping>

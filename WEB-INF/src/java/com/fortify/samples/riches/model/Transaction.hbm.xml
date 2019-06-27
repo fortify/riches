@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fortify.samples.riches.model.Transaction" table="transaction" >
+        <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+            <generator class="native"/>
+        </id>
+        <property name="acctno" column="acctno" type="java.lang.String" />
+        <property name="description" column="description" type="java.lang.String" />
+        <property name="amount" column="amount" type="java.lang.Double" />
+        <property name="date" column="date" type="java.sql.Date" />
+        <property name="payee" column="payee" type="java.lang.String" />
+    </class>
+</hibernate-mapping>

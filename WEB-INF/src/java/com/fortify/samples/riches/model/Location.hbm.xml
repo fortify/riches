@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.fortify.samples.riches.model.Location" table="location" >
+        <id name="id" column="id" type="java.lang.Long" unsaved-value="null">
+            <generator class="native"/>
+        </id>
+        <property name="address" column="address" type="java.lang.String" />
+        <property name="city" column="city" type="java.lang.String" />
+        <property name="state" column="state" type="java.lang.String" />
+        <property name="zip" column="zip" type="java.lang.String" />
+        <property name="atm" column="atm" type="java.lang.String" />
+        <property name="branch" column="branch" type="java.lang.String" />
+    </class>
+</hibernate-mapping>
