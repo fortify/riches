@@ -3,3 +3,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+WEB-INF/classes/
+WEB-INF/lib/riches_db.jar
+WEB-INF/web.xml
+
+*.fpr
+*.log
+
+version.txt

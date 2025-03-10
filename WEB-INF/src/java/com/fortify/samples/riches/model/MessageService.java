@@ -62,7 +62,7 @@ public class MessageService
         }
     }
 
-    public static List getMessage(Long id) throws Exception
+    public static List<Message> getMessage(Long id) throws Exception
     {
         Session session = ConnectionFactory.getInstance().getSession();
 
@@ -72,15 +72,15 @@ public class MessageService
         session.close();
 		
 		// Sanitize incoming messages from database
-		ArrayList sanitizedMessages = new ArrayList();
+		ArrayList<Message> sanitizedMessages = new ArrayList<Message>();
 		
 		for (int index=0; index < messages.size(); index++)
 		{
-			Message sanitizedMessage = validateMessage((Message)(messages.get(index)));
+			Message sanitizedMessage = validateMessage((Message) messages.get(index));
 			sanitizedMessages.add(sanitizedMessage);
 		}
 		
-        return (List)sanitizedMessages;
+        return sanitizedMessages;
     }
 
 	private static Message validateMessage(Message incomingMessage) throws Exception

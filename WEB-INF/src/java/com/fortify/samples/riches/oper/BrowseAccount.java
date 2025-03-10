@@ -12,16 +12,17 @@ import org.apache.struts2.ServletActionContext;
 public class BrowseAccount extends AdminSupport
 {
 
-    private List profiles;
+    private List<Profile> profiles;
 
     public BrowseAccount()
     {
     }
 
+    @SuppressWarnings("unchecked")
     public String execute() throws Exception
     {
         javax.servlet.http.HttpServletRequest request = ServletActionContext.getRequest();
-        profiles = ProfileService.getAllProfiles();
+        profiles = (List<Profile>) ProfileService.getAllProfiles();
         Profile profile = new Profile();
         profile.setUsername("[All Accounts]");
         profiles.add(0, profile);
@@ -32,12 +33,12 @@ public class BrowseAccount extends AdminSupport
         return "success";
     }
 
-    public List getProfiles()
+    public List<Profile> getProfiles()
     {
         return profiles;
     }
 
-    public void setProfiles(List profiles)
+    public void setProfiles(List<Profile> profiles)
     {
         this.profiles = profiles;
     }

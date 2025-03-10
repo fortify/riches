@@ -97,11 +97,11 @@ public class LocationService
     }
 
     /* Example on how prepareStatement can be misused in such a way that the query is still vuln to SQLi */
-    public static List findByZip(String zip) throws Exception
+    public static List<Location> findByZip(String zip) throws Exception
     {
         Connection conn=null;
         PreparedStatement statement = null;
-        ArrayList locations = new ArrayList();
+        ArrayList<Location> locations = new ArrayList<Location>();
 
         try{
             conn = ConnFactory.getInstance().getConnection();
@@ -125,11 +125,11 @@ public class LocationService
     }
 
 
-    public static List findAtmByAddress(String address, String city, String state) throws Exception
+    public static List<Location> findAtmByAddress(String address, String city, String state) throws Exception
     {
         Connection conn=null;
         Statement statement = null;
-        ArrayList locations = new ArrayList();
+        ArrayList<Location> locations = new ArrayList<Location>();
 
         try{
             conn = ConnFactory.getInstance().getConnection();

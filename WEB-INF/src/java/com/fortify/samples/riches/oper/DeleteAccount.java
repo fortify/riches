@@ -15,26 +15,27 @@ import org.json.JSONObject;
 
 public class DeleteAccount extends AdminSupport
 {
-    private List profiles;
+    private List<Profile> profiles;
 
     public DeleteAccount()
     {
     }
 
+    @SuppressWarnings("unchecked")
     public String execute() throws Exception
     {
         javax.servlet.http.HttpServletRequest request = ServletActionContext.getRequest();
-        profiles = ProfileService.getAllProfiles();
+        profiles = (List<Profile>) ProfileService.getAllProfiles();
         super.execute();
         return "success";
     }
 
-    public List getProfiles()
+    public List<Profile> getProfiles()
     {
         return profiles;
     }
 
-    public void setProfiles(List profiles)
+    public void setProfiles(List<Profile> profiles)
     {
         this.profiles = profiles;
     }

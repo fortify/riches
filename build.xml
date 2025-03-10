@@ -29,7 +29,7 @@
     <property name="jboss4.dir" location="${basedir}/etc/jboss4-support"/>
 
 
-    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="../tools/ant-contrib.jar"/>
+    <taskdef resource="net/sf/antcontrib/antlib.xml" classpath="lib/ant-contrib.jar"/>
 
     <path id="javac.classpath">
         <fileset dir="${libs}">
@@ -42,7 +42,7 @@
 
     <!-- riches now include HSQL 2.3, but to generate the database file, we still have to use old version 1.8, otherwise, it has problem in Tomcat 6.0, no time to investigate... -->
     <path id="hsql.classpath">
-        <pathelement location="../tools/hsqldb-1.8.jar"/>
+        <pathelement location="lib/hsqldb-1.8.jar"/>
     </path>
 
     <target name="tomcat5.5">
@@ -105,8 +105,9 @@
         <!-- ELSE: --> <property name="compile-server-support.target" value="compile-tomcat5.0-support"/>
         <antcall target="${compile-server-support.target}"/>
 
-        <javac srcdir="${src.java}" destdir="${classes}" debug="on" source="1.5" target="1.5">
+        <javac srcdir="${src.java}" destdir="${classes}" debug="on">
             <classpath refid="javac.classpath"/>
+            <compilerarg value="-Xlint:unchecked"/>
         </javac>
 
         <post.compile />
